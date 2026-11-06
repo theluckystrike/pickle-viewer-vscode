@@ -5,6 +5,7 @@ const { Worker } = require('worker_threads');
 const { buildHtml } = require('./html');
 const { validateWebviewMessage, validateWorkerMessage, sizePlan, fmtSize } = require('./core/protocol');
 const { createRatingPrompt } = require('./rate');
+const { registerSupport, commandUris, showLinks } = require('./support');
 
 const VIEW_TYPE = 'pickleViewer.preview';
 const VIEW_TYPE_P = 'pickleViewer.previewP';
@@ -49,13 +50,15 @@ class PickleEditorProvider {
     const uri = document.uri;
     const dist = vscode.Uri.joinPath(ctx.extensionUri, 'dist');
     const media = vscode.Uri.joinPath(ctx.extensionUri, 'media');
-    panel.webview.options = { enableScripts: true, localResourceRoots: [dist, media] };
+    // Command links are limited to the two support commands and the settings page (footer "Hide" link).
+    panel.webview.options = { enableScripts: true, localResourceRoots: [dist, media], enableCommandUris: commandUris('pickleViewer') };
     const name = path.posix.basename(uri.path);
     panel.webview.html = buildHtml({
       cspSource: panel.webview.cspSource,
       scriptUri: panel.webview.asWebviewUri(vscode.Uri.joinPath(dist, 'webview.js')).toString(),
       styleUri: panel.webview.asWebviewUri(vscode.Uri.joinPath(media, 'webview.css')).toString(),
       title: name,
+      showSupportLinks: showLinks(vscode, 'pickleViewer'),
     });
     let disposed = false;
     let counted = false; // one success per opened tab, for the rating prompt
@@ -97,6 +100,7 @@ class PickleEditorProvider {
 
 function activate(context) {
   rating = createRatingPrompt({ vscode, context, extensionId: EXT_ID, section: 'pickleViewer', message: (n) => `PKL Viewer has opened ${n} pickle files for you. A rating helps other people find it.` });
+  registerSupport({ vscode, context, prefix: 'pickleViewer', selfId: EXT_ID });
   const provider = new PickleEditorProvider(context);
   const opts = { supportsMultipleEditorsPerDocument: true, webviewOptions: { retainContextWhenHidden: true } };
   context.subscriptions.push(

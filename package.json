@@ -2,7 +2,7 @@
   "name": "zovo-pickle-viewer",
   "displayName": "PKL Viewer & Pickle Viewer",
   "description": "PKL viewer and pickle viewer for Python .pkl, .pickle and .p files that opens them without Python and never runs their code, with a tree, NumPy arrays, pandas tables, opcodes and a safety check.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "zovo",
   "license": "MIT",
   "icon": "icon.png",
@@ -95,6 +95,16 @@
         "command": "pickleViewer.openWith",
         "title": "Open in PKL Viewer",
         "category": "PKL Viewer"
+      },
+      {
+        "command": "pickleViewer.supportDeveloper",
+        "title": "Support the developer",
+        "category": "PKL Viewer"
+      },
+      {
+        "command": "pickleViewer.moreViewers",
+        "title": "More free viewers",
+        "category": "PKL Viewer"
       }
     ],
     "menus": {
@@ -126,6 +136,11 @@
           "type": "boolean",
           "default": true,
           "description": "Ask one time for a Marketplace rating after you have used PKL Viewer for a few days. You can answer \"Later\" or \"Don't ask again\". Nothing is sent anywhere."
+        },
+        "pickleViewer.showSupportLinks": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the small Sponsor and More free viewers links at the bottom of the viewer. The change shows in files you open next. Nothing is sent anywhere."
         }
       }
     },
@@ -194,5 +209,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/theluckystrike/pickle-viewer-vscode"
+  },
+  "sponsor": {
+    "url": "https://github.com/sponsors/theluckystrike"
   }
 }

@@ -54,7 +54,7 @@ fs.writeFileSync(risky, Buffer.from("cos\nsystem\n(S'true'\ntR.", 'latin1'));
 test('activate registers both editors and the commands; manifest matches', () => {
   ext.activate(ctxOf());
   assert.deepEqual(vscodeMock.window.registered.map(r => r[0]), ['pickleViewer.preview', 'pickleViewer.previewP']);
-  assert.deepEqual(vscodeMock.commands.list.sort(), ['pickleViewer.openWalkthrough', 'pickleViewer.openWith']);
+  assert.deepEqual(vscodeMock.commands.list.sort(), ['pickleViewer.moreViewers', 'pickleViewer.openWalkthrough', 'pickleViewer.openWith', 'pickleViewer.supportDeveloper']);
   const pkg = require('../package.json');
   const eds = pkg.contributes.customEditors;
   assert.deepEqual(eds.map(e => e.viewType), [ext.VIEW_TYPE, ext.VIEW_TYPE_P]);
@@ -65,7 +65,7 @@ test('activate registers both editors and the commands; manifest matches', () =>
   assert.ok(pkg.displayName.toLowerCase().startsWith('pkl viewer') && pkg.displayName.length <= 45);
   assert.ok(pkg.keywords.length <= 30);
   assert.equal(`${pkg.publisher}.${pkg.name}`, ext.EXT_ID);
-  assert.equal(pkg.version, '0.1.0');
+  assert.equal(pkg.version, '0.1.1');
   assert.equal(pkg.contributes.configuration.properties['pickleViewer.askForRating'].default, true);
   assert.equal(pkg.contributes.configuration.properties['pickleViewer.maxFileMB'].default, 512);
 });
@@ -130,4 +130,29 @@ test('rendered counts once per tab, copy goes to the clipboard, unknown messages
   f.close();
   await f.send({ type: 'copy', text: 'z' });
   assert.equal(f.sent.length, n, 'nothing is posted after dispose');
+});
+
+// ---------- support links (Sponsor, More free viewers) ----------
+test('support: package.json has the sponsor field, the two commands and the setting', () => {
+  const pkg = require('../package.json');
+  const support = require('../src/support');
+  assert.equal(pkg.sponsor.url, 'https://github.com/sponsors/theluckystrike');
+  assert.equal(pkg.sponsor.url, support.sponsorUrl());
+  const ids = pkg.contributes.commands.map(c => c.command);
+  assert.ok(ids.includes('pickleViewer.supportDeveloper') && ids.includes('pickleViewer.moreViewers'));
+  assert.equal(pkg.contributes.configuration.properties['pickleViewer.showSupportLinks'].default, true);
+  assert.ok(support.otherProducts(ext.EXT_ID).every(p => p.id !== ext.EXT_ID));
+});
+
+test('support: the footer shows by default and pickleViewer.showSupportLinks=false hides it', async () => {
+  for (const [value, shown] of [[undefined, true], [false, false]]) {
+    if (value === undefined) delete state.config.showSupportLinks; else state.config.showSupportLinks = value;
+    try {
+      const f = await open(risky);
+      assert.equal(/id="zovo-support"/.test(f.panel.webview.html), shown, String(value));
+      assert.equal(f.panel.webview.html.includes('command:pickleViewer.moreViewers'), shown);
+      assert.deepEqual(f.panel.webview.options.enableCommandUris, ['pickleViewer.supportDeveloper', 'pickleViewer.moreViewers', 'workbench.action.openSettings']);
+      f.close();
+    } finally { delete state.config.showSupportLinks; }
+  }
 });
