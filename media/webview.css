@@ -1,0 +1,82 @@
+:root { --gap: 10px; --mono: var(--vscode-editor-font-family, Menlo, monospace); --risk: #e5484d; --warn: #d4a72c; --ok: #3fb950; --info: #3987e5; }
+body { padding: 0; margin: 0; color: var(--vscode-foreground); background: var(--vscode-editor-background); font-family: var(--vscode-font-family); font-size: var(--vscode-font-size, 13px); }
+#app { padding: 12px 16px 24px; }
+.loading, .muted { color: var(--vscode-descriptionForeground); }
+.head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--gap); margin-bottom: 10px; }
+.title { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.fname { font-size: 1.25em; font-weight: 600; }
+.meta { color: var(--vscode-descriptionForeground); }
+.nopy { display: inline-flex; gap: 8px; align-items: center; padding: 5px 10px; border-radius: 4px; border: 1px solid color-mix(in srgb, var(--ok) 55%, transparent); background: color-mix(in srgb, var(--ok) 12%, transparent); font-weight: 500; }
+.nopy .shield { color: var(--ok); }
+.banner, .verdict { border-radius: 4px; padding: 10px 12px; margin: 8px 0 12px; border: 1px solid; display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; }
+.banner.danger, .verdict.danger { border-color: var(--risk); background: color-mix(in srgb, var(--risk) 14%, transparent); }
+.banner.warn, .verdict.warn { border-color: var(--warn); background: color-mix(in srgb, var(--warn) 14%, transparent); }
+.verdict.custom { border-color: var(--info); background: color-mix(in srgb, var(--info) 10%, transparent); }
+.verdict.data { border-color: var(--ok); background: color-mix(in srgb, var(--ok) 10%, transparent); }
+code, pre, .val, .key, .apath { font-family: var(--mono); font-size: var(--vscode-editor-font-size, 12px); }
+.banner code, .verdict code { padding: 1px 6px; border-radius: 3px; background: var(--vscode-textCodeBlock-background); }
+.notice { border-radius: 4px; padding: 10px 12px; margin: 8px 0; border: 1px solid var(--vscode-panel-border, #8884); }
+.notice.err { border-color: var(--risk); }
+.notice.big { font-size: 1.1em; padding: 18px; }
+.tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--vscode-panel-border, #8884); margin-top: 6px; align-items: center; }
+.tab { background: none; border: none; border-bottom: 2px solid transparent; color: var(--vscode-foreground); padding: 7px 12px; cursor: pointer; font: inherit; display: inline-flex; gap: 6px; align-items: center; opacity: .8; }
+.tab.on { border-bottom-color: var(--vscode-focusBorder); opacity: 1; font-weight: 600; }
+.tab:focus-visible, .row:focus-visible, button:focus-visible { outline: 1px solid var(--vscode-focusBorder); outline-offset: -1px; }
+.badge { font-size: .85em; min-width: 18px; padding: 0 6px; border-radius: 9px; background: var(--vscode-badge-background); color: var(--vscode-badge-foreground); text-align: center; }
+.badge.danger { background: var(--risk); color: #fff; }
+.badge.warn { background: var(--warn); color: #000; }
+.spacer { flex: 1; }
+button { font: inherit; color: var(--vscode-button-secondaryForeground); background: var(--vscode-button-secondaryBackground); border: 1px solid transparent; border-radius: 3px; padding: 3px 10px; cursor: pointer; }
+button:hover { background: var(--vscode-button-secondaryHoverBackground); }
+button.on { background: var(--vscode-button-background); color: var(--vscode-button-foreground); }
+button.link { background: none; color: var(--vscode-textLink-foreground); padding: 0 4px; }
+button.link:hover { text-decoration: underline; }
+.panel { padding-top: 10px; }
+.tools { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 8px; }
+.tree { border: 1px solid var(--vscode-panel-border, #8884); border-radius: 4px; padding: 4px 0; overflow-x: auto; }
+.row { display: flex; gap: 8px; align-items: baseline; white-space: nowrap; padding: 2px 8px 2px 4px; cursor: default; line-height: 1.55; }
+.row[aria-expanded] { cursor: pointer; }
+.row:hover { background: var(--vscode-list-hoverBackground); }
+.row.more { color: var(--vscode-descriptionForeground); font-style: italic; }
+.tw { width: 12px; display: inline-block; color: var(--vscode-descriptionForeground); }
+.key { color: var(--vscode-symbolIcon-fieldForeground, var(--vscode-debugTokenExpression-name, #9cdcfe)); }
+.type { color: var(--vscode-symbolIcon-classForeground, #4ec9b0); font-size: .92em; }
+.type.ph { color: var(--warn); }
+.len { color: var(--vscode-descriptionForeground); font-size: .9em; }
+.val { color: var(--vscode-debugTokenExpression-string, #ce9178); overflow: hidden; text-overflow: ellipsis; max-width: 70vw; }
+.tag { font-size: .8em; padding: 0 6px; border-radius: 8px; border: 1px solid var(--vscode-panel-border, #8886); color: var(--vscode-descriptionForeground); }
+.arrays { display: grid; grid-template-columns: minmax(200px, 300px) minmax(0, 1fr); gap: 16px; align-items: start; }
+.alist { display: flex; flex-direction: column; gap: 2px; }
+.aitem { display: flex; flex-direction: column; align-items: flex-start; text-align: left; background: none; border: 1px solid transparent; padding: 6px 8px; }
+.aitem.on { border-color: var(--vscode-focusBorder); background: var(--vscode-list-activeSelectionBackground); color: var(--vscode-list-activeSelectionForeground); }
+.facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 6px 14px; margin-bottom: 8px; }
+.fact { display: flex; flex-direction: column; }
+.fl { color: var(--vscode-descriptionForeground); font-size: .85em; }
+.fv { font-family: var(--mono); overflow-wrap: anywhere; }
+h3 { font-size: 1em; margin: 16px 0 6px; }
+.viz canvas { display: block; }
+.heat { border: 1px solid var(--vscode-panel-border, #8884); }
+.scale { display: flex; justify-content: space-between; font-family: var(--mono); font-size: .85em; color: var(--vscode-descriptionForeground); }
+.cap, .note { color: var(--vscode-descriptionForeground); font-size: .9em; margin: 4px 0; }
+.gridwrap { overflow: auto; max-height: 70vh; border: 1px solid var(--vscode-panel-border, #8884); border-radius: 4px; }
+table.grid { border-collapse: collapse; font-family: var(--mono); font-size: var(--vscode-editor-font-size, 12px); }
+table.grid th, table.grid td { padding: 3px 10px; border-bottom: 1px solid var(--vscode-panel-border, #8883); text-align: right; white-space: nowrap; }
+table.grid thead th { position: sticky; top: 0; background: var(--vscode-editor-background); z-index: 1; }
+table.grid tr.dtypes th { top: 22px; color: var(--vscode-descriptionForeground); font-weight: normal; font-size: .9em; }
+table.grid tbody th { color: var(--vscode-descriptionForeground); font-weight: normal; }
+table.safety { width: 100%; }
+table.safety td, table.safety th { text-align: left; white-space: normal; }
+table.safety td:last-child { min-width: 120px; }
+tr.danger td { background: color-mix(in srgb, var(--risk) 9%, transparent); }
+.pill { font-size: .85em; padding: 1px 8px; border-radius: 9px; white-space: nowrap; font-family: var(--vscode-font-family); }
+.pill.danger { background: var(--risk); color: #fff; }
+.pill.warn { background: var(--warn); color: #000; }
+.pill.custom { background: color-mix(in srgb, var(--info) 30%, transparent); }
+.pill.data { background: color-mix(in srgb, var(--ok) 25%, transparent); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 8px; }
+.chip { font-family: var(--mono); font-size: .85em; padding: 1px 8px; border-radius: 9px; background: var(--vscode-badge-background); color: var(--vscode-badge-foreground); }
+pre.ops { margin: 0; padding: 8px 10px; border: 1px solid var(--vscode-panel-border, #8884); border-radius: 4px; overflow: auto; max-height: 72vh; line-height: 1.45; }
+.tip { position: fixed; display: none; z-index: 10; pointer-events: none; padding: 4px 8px; border-radius: 3px; font-family: var(--mono); font-size: .85em; background: var(--vscode-editorHoverWidget-background); border: 1px solid var(--vscode-editorHoverWidget-border); color: var(--vscode-editorHoverWidget-foreground); }
+.flash { position: fixed; bottom: 14px; right: 14px; padding: 6px 12px; border-radius: 4px; background: var(--vscode-notifications-background); border: 1px solid var(--vscode-notifications-border, #8886); }
+@media (max-width: 700px) { .arrays { grid-template-columns: 1fr; } }
+.adetail { min-width: 0; }

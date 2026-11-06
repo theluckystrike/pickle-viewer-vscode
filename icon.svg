@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <rect width="128" height="128" rx="22" fill="#16202E"/>
+  <rect x="34" y="18" width="60" height="14" rx="4" fill="#3fb950"/>
+  <path d="M30 40 q0-6 6-6 h56 q6 0 6 6 v62 q0 10 -10 10 h-48 q-10 0 -10 -10 z" fill="#22344a" stroke="#5aa2ef" stroke-width="4"/>
+  <text x="64" y="71" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="700" font-size="24" fill="#e8f1fb">PKL</text>
+  <path d="M46 84 h36 M46 94 h24" stroke="#5aa2ef" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="92" cy="96" r="16" fill="#16202E" stroke="#3fb950" stroke-width="4"/>
+  <path d="M84 96 l6 6 l10 -12" fill="none" stroke="#3fb950" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

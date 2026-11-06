@@ -1,0 +1,198 @@
+{
+  "name": "zovo-pickle-viewer",
+  "displayName": "PKL Viewer & Pickle Viewer",
+  "description": "PKL viewer and pickle viewer for Python .pkl, .pickle and .p files that opens them without Python and never runs their code, with a tree, NumPy arrays, pandas tables, opcodes and a safety check.",
+  "version": "0.1.0",
+  "publisher": "zovo",
+  "license": "MIT",
+  "icon": "icon.png",
+  "galleryBanner": {
+    "color": "#16202E",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.90.0",
+    "node": ">=18"
+  },
+  "categories": [
+    "Data Science",
+    "Visualization",
+    "Machine Learning"
+  ],
+  "keywords": [
+    "pkl viewer",
+    "pickle viewer",
+    "pkl",
+    "pickle",
+    "python pickle",
+    "pickle file",
+    "pkl file",
+    "pickle inspector",
+    "pickle scanner",
+    "pickle security",
+    "malicious pickle",
+    "unpickle",
+    "pickletools",
+    "opcodes",
+    "deserialization",
+    "numpy",
+    "numpy array",
+    "ndarray",
+    "pandas",
+    "dataframe",
+    "dataframe viewer",
+    "data viewer",
+    "python",
+    "data science",
+    "machine learning",
+    "model file",
+    "heatmap",
+    "tree view",
+    "no python",
+    "offline"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": true
+  },
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "pickleViewer.preview",
+        "displayName": "PKL Viewer",
+        "selector": [
+          {
+            "filenamePattern": "*.pkl"
+          },
+          {
+            "filenamePattern": "*.pickle"
+          }
+        ],
+        "priority": "default"
+      },
+      {
+        "viewType": "pickleViewer.previewP",
+        "displayName": "PKL Viewer",
+        "selector": [
+          {
+            "filenamePattern": "*.p"
+          }
+        ],
+        "priority": "option"
+      }
+    ],
+    "commands": [
+      {
+        "command": "pickleViewer.openWalkthrough",
+        "title": "Get Started",
+        "category": "PKL Viewer"
+      },
+      {
+        "command": "pickleViewer.openWith",
+        "title": "Open in PKL Viewer",
+        "category": "PKL Viewer"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "pickleViewer.openWith",
+          "when": "resourceExtname =~ /^\\.(pkl|pickle|p)$/i",
+          "group": "navigation@9"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "pickleViewer.openWith",
+          "when": "false"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "PKL Viewer",
+      "properties": {
+        "pickleViewer.maxFileMB": {
+          "type": "number",
+          "default": 512,
+          "minimum": 1,
+          "maximum": 2048,
+          "description": "Pickle files up to this size are decoded. Larger files show a message and are not read."
+        },
+        "pickleViewer.askForRating": {
+          "type": "boolean",
+          "default": true,
+          "description": "Ask one time for a Marketplace rating after you have used PKL Viewer for a few days. You can answer \"Later\" or \"Don't ask again\". Nothing is sent anywhere."
+        }
+      }
+    },
+    "walkthroughs": [
+      {
+        "id": "pickleViewer.start",
+        "title": "Get started with PKL Viewer",
+        "description": "Look inside Python pickle files without Python and without running them.",
+        "steps": [
+          {
+            "id": "open",
+            "title": "Open a pickle file",
+            "description": "Click a .pkl or .pickle file in the Explorer. For .p files, right-click and pick Open in PKL Viewer.\n[Find a pickle file](command:workbench.action.quickOpen?%5B%22.pkl%22%5D)",
+            "media": {
+              "image": "images/tree.png",
+              "altText": "A pickle file in PKL Viewer with the decoded tree, types and a custom class shown as a placeholder."
+            },
+            "completionEvents": [
+              "onCommand:workbench.action.quickOpen"
+            ]
+          },
+          {
+            "id": "data",
+            "title": "Arrays and tables",
+            "description": "NumPy arrays show their shape, dtype, min, max, mean and a heatmap. pandas DataFrames show as a table.",
+            "media": {
+              "markdown": "walkthrough/data.md"
+            }
+          },
+          {
+            "id": "safety",
+            "title": "Check a file before you load it",
+            "description": "The Safety tab lists every name the file would import or call in Python and flags risky ones such as os.system or builtins.eval.",
+            "media": {
+              "markdown": "walkthrough/safety.md"
+            }
+          },
+          {
+            "id": "settings",
+            "title": "Size limit",
+            "description": "Pick the largest file to decode.\n[Open settings](command:workbench.action.openSettings?%5B%22pickleViewer%22%5D)",
+            "media": {
+              "markdown": "walkthrough/settings.md"
+            },
+            "completionEvents": [
+              "onCommand:workbench.action.openSettings"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "build": "node scripts/build.js --production",
+    "test": "node scripts/build.js --production && node --test \"test/*.test.js\"",
+    "samples": "python3 scripts/make_samples.py samples",
+    "package": "npm run build && npx -y @vscode/vsce package --no-dependencies -o dist/"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  },
+  "homepage": "https://github.com/theluckystrike/pickle-viewer-vscode#readme",
+  "bugs": {
+    "url": "https://github.com/theluckystrike/pickle-viewer-vscode/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theluckystrike/pickle-viewer-vscode"
+  }
+}

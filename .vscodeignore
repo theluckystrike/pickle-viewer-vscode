@@ -1,0 +1,17 @@
+src/**
+test/**
+scripts/**
+samples/**
+node_modules/**
+e2e-tmp/**
+**/*.map
+icon.svg
+.gitignore
+dist/*.vsix
+*.vsix
+package-lock.json
+images/arrays.png
+images/safety.png
+images/table.png
+images/opcodes.png
+.github/**
