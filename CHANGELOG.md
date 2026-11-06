@@ -5,6 +5,8 @@
 - The end of the viewer page has two small links, "Sponsor" (GitHub Sponsors) and "More free viewers". The new setting `pickleViewer.showSupportLinks` (default `true`) hides them, and so does the "Hide" link next to them. There is no popup, and nothing is sent anywhere.
 - New commands "PKL Viewer: Support the developer" and "PKL Viewer: More free viewers". The second one lists the other Zovo extensions and installs only the one you pick. Ones that are not on the Marketplace yet open their GitHub page.
 - The listing gets a Sponsor button. The README has a short Support section and lists all Zovo extensions.
+- The "More free viewers" list and the README list now show the 15 Zovo extensions on the Marketplace under their current names, and 11 that are coming soon.
+- Extensions for related files now come first, starting with GGUF, Safetensors & NPY Viewer (NumPy Viewer) and CSV Viewer, Excel Viewer & Parquet Viewer.
 
 ## 0.1.0
 
