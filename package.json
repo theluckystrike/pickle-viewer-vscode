@@ -2,7 +2,7 @@
   "name": "zovo-pickle-viewer",
   "displayName": "PKL Viewer & Pickle Viewer",
   "description": "PKL viewer and pickle viewer for Python .pkl, .pickle and .p files that opens them without Python and never runs their code, with a tree, NumPy arrays, pandas tables, opcodes and a safety check.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "publisher": "zovo",
   "license": "MIT",
   "icon": "icon.png",

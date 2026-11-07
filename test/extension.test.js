@@ -65,7 +65,7 @@ test('activate registers both editors and the commands; manifest matches', () =>
   assert.ok(pkg.displayName.toLowerCase().startsWith('pkl viewer') && pkg.displayName.length <= 45);
   assert.ok(pkg.keywords.length <= 30);
   assert.equal(`${pkg.publisher}.${pkg.name}`, ext.EXT_ID);
-  assert.equal(pkg.version, '0.1.1');
+  assert.match(pkg.version, /^\d+\.\d+\.\d+$/); // monetize.py rollouts bump it
   assert.equal(pkg.contributes.configuration.properties['pickleViewer.askForRating'].default, true);
   assert.equal(pkg.contributes.configuration.properties['pickleViewer.maxFileMB'].default, 512);
 });
