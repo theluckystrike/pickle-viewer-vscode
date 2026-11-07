@@ -62,7 +62,7 @@ test('activate registers both editors and the commands; manifest matches', () =>
   assert.equal(eds[0].priority, 'default');
   assert.deepEqual(eds[1].selector.map(s => s.filenamePattern), ['*.p']);
   assert.equal(eds[1].priority, 'option', '.p is also Progress ABL source, so it opens by choice');
-  assert.ok(pkg.displayName.toLowerCase().startsWith('pkl viewer') && pkg.displayName.length <= 45);
+  assert.ok(pkg.displayName.toLowerCase().startsWith('pickle viewer') && pkg.displayName.length <= 45);
   assert.ok(pkg.keywords.length <= 30);
   assert.equal(`${pkg.publisher}.${pkg.name}`, ext.EXT_ID);
   assert.match(pkg.version, /^\d+\.\d+\.\d+$/); // monetize.py rollouts bump it

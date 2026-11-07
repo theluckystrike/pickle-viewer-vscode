@@ -1,4 +1,4 @@
-# PKL Viewer & Pickle Viewer
+# Pickle Viewer & PKL Viewer (No Python)
 
 Open Python `.pkl`, `.pickle` and `.p` files in VS Code without Python, and see what a pickle would do before you load it.
 
