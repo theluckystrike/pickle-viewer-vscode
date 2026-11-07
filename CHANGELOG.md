@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.4 (2026-11-08)
+
+- The "More free viewers" list and the README now use the current Marketplace names and include the newest Zovo extensions: ZIP, GCode, EPUB, HAR, font and audio viewers.
+
 ## 0.1.3 (2026-11-07)
 
 - The Marketplace name is now "Pickle Viewer & PKL Viewer (No Python)" (it was "PKL Viewer & Pickle Viewer"), so it matches what people type in the Extensions search. The extension id, commands and settings stay the same.
